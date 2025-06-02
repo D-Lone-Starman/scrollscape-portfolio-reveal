@@ -1,12 +1,33 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import ThreeBackground from '../components/ThreeBackground';
+import Navigation from '../components/Navigation';
+import HeroSection from '../components/HeroSection';
+import AboutSection from '../components/AboutSection';
+import SkillsSection from '../components/SkillsSection';
+import ProjectsSection from '../components/ProjectsSection';
+import ContactSection from '../components/ContactSection';
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="relative">
+      <ThreeBackground />
+      <Navigation />
+      
+      <main className="relative z-10">
+        <HeroSection />
+        <AboutSection />
+        <SkillsSection />
+        <ProjectsSection />
+        <ContactSection />
+      </main>
+      
+      <footer className="relative z-10 py-8 px-4 border-t border-white/10">
+        <div className="max-w-6xl mx-auto text-center">
+          <p className="text-gray-400">
+            © 2024 Portfolio. Built with React, Three.js & Tailwind CSS
+          </p>
+        </div>
+      </footer>
     </div>
   );
 };
