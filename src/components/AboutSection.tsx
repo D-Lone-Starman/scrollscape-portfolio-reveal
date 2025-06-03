@@ -28,9 +28,15 @@ const AboutSection = () => {
             <div className={`transition-all duration-1000 delay-200 ${
               isVisible ? 'animate-fade-in-left' : 'opacity-0 -translate-x-10'
             }`}>
-              <div className="relative">
-                <div className="w-80 h-80 mx-auto bg-gradient-to-br from-purple-500 via-pink-500 to-red-500 rounded-full opacity-20 blur-xl"></div>
-                <div className="absolute inset-0 w-80 h-80 mx-auto bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-full backdrop-blur-sm border border-white/10"></div>
+              <div className="relative max-w-sm mx-auto">
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-500 via-pink-500 to-red-500 rounded-2xl opacity-20 blur-xl"></div>
+                <div className="relative bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-2xl p-4 backdrop-blur-sm border border-white/10">
+                  <img 
+                    src="/lovable-uploads/dd2250c7-1259-4a2d-9f03-2f52a4a9364d.png" 
+                    alt="João Estrella"
+                    className="w-full h-auto rounded-xl object-cover"
+                  />
+                </div>
               </div>
             </div>
             
@@ -38,7 +44,7 @@ const AboutSection = () => {
               isVisible ? 'animate-fade-in-right' : 'opacity-0 translate-x-10'
             }`}>
               <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10">
-                <h3 className="text-2xl font-semibold text-white mb-6">Hello, I'm a Frontend Designer</h3>
+                <h3 className="text-2xl font-semibold text-white mb-6">Hello, I'm João Estrella</h3>
                 <p className="text-gray-300 leading-relaxed mb-6">
                   I'm passionate about creating beautiful, user-friendly interfaces that provide exceptional 
                   user experiences. With a focus on modern web technologies like React, Tailwind CSS, and 
