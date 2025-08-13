@@ -1,5 +1,5 @@
 
-// import ThreeBackground from '../components/ThreeBackground';
+import ThreeBackground from '../components/ThreeBackground';
 import Navigation from '../components/Navigation';
 import HeroSection from '../components/HeroSection';
 import AboutSection from '../components/AboutSection';
@@ -9,8 +9,8 @@ import ContactSection from '../components/ContactSection';
 
 const Index = () => {
   return (
-    <div className="relative bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 min-h-screen">
-      {/* <ThreeBackground /> */}
+    <div className="relative">
+      <ThreeBackground />
       <Navigation />
       
       <main className="relative z-10">
