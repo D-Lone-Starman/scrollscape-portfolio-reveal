@@ -4,27 +4,52 @@ import { Suspense, useRef } from 'react';
 import { Mesh, Vector3 } from 'three';
 import { OrbitControls } from '@react-three/drei';
 
-const FloatingGeometry = ({ position, color, speed }: { position: [number, number, number], color: string, speed: number }) => {
+const FloatingGeometry = ({ position, color, speed, geometryType }: { 
+  position: [number, number, number], 
+  color: string, 
+  speed: number,
+  geometryType: string 
+}) => {
   const meshRef = useRef<Mesh>(null);
   
   useFrame((state) => {
     if (meshRef.current) {
       meshRef.current.rotation.x += speed;
       meshRef.current.rotation.y += speed * 0.8;
+      meshRef.current.rotation.z += speed * 0.5;
       meshRef.current.position.y = position[1] + Math.sin(state.clock.elapsedTime * speed) * 0.5;
     }
   });
 
+  const renderGeometry = () => {
+    const size = 0.6 + Math.random() * 0.4;
+    switch (geometryType) {
+      case 'cube':
+        return <boxGeometry args={[size, size, size]} />;
+      case 'pyramid':
+        return <coneGeometry args={[size, size * 1.5, 4]} />;
+      case 'octahedron':
+        return <octahedronGeometry args={[size, 0]} />;
+      case 'icosahedron':
+        return <icosahedronGeometry args={[size, 0]} />;
+      case 'dodecahedron':
+      default:
+        return <dodecahedronGeometry args={[size, 0]} />;
+    }
+  };
+
   return (
     <mesh ref={meshRef} position={position}>
-      <dodecahedronGeometry args={[0.8, 0]} />
+      {renderGeometry()}
       <meshStandardMaterial 
         color={color} 
-        wireframe={Math.random() > 0.5}
+        wireframe={Math.random() > 0.6}
         transparent
         opacity={0.7}
         emissive={color}
         emissiveIntensity={0.1}
+        metalness={0.3}
+        roughness={0.4}
       />
     </mesh>
   );
@@ -39,14 +64,18 @@ const Scene = () => {
     }
   });
 
-  const geometries = Array.from({ length: 8 }, (_, i) => ({
+  const geometryTypes = ['cube', 'pyramid', 'octahedron', 'icosahedron', 'dodecahedron'];
+  const colors = ['#8b5cf6', '#06b6d4', '#10b981', '#f59e0b', '#ef4444', '#ec4899', '#3b82f6', '#f97316'];
+
+  const geometries = Array.from({ length: 15 }, (_, i) => ({
     position: [
-      (Math.random() - 0.5) * 15,
-      (Math.random() - 0.5) * 15,
-      (Math.random() - 0.5) * 15
+      (Math.random() - 0.5) * 18,
+      (Math.random() - 0.5) * 18,
+      (Math.random() - 0.5) * 18
     ] as [number, number, number],
-    color: ['#8b5cf6', '#06b6d4', '#10b981', '#f59e0b', '#ef4444', '#ec4899'][Math.floor(Math.random() * 6)],
-    speed: 0.01 + Math.random() * 0.02
+    color: colors[Math.floor(Math.random() * colors.length)],
+    speed: 0.008 + Math.random() * 0.015,
+    geometryType: geometryTypes[Math.floor(Math.random() * geometryTypes.length)]
   }));
 
   return (
@@ -62,6 +91,7 @@ const Scene = () => {
           position={geom.position}
           color={geom.color}
           speed={geom.speed}
+          geometryType={geom.geometryType}
         />
       ))}
     </group>
