@@ -1,7 +1,7 @@
 
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Suspense, useRef } from 'react';
-import { Mesh, Vector3 } from 'three';
+import { Suspense, useRef, useMemo } from 'react';
+import { Mesh } from 'three';
 import { OrbitControls } from '@react-three/drei';
 
 const FloatingGeometry = ({ position, color, speed, geometryType }: { 
@@ -21,29 +21,46 @@ const FloatingGeometry = ({ position, color, speed, geometryType }: {
     }
   });
 
-  const renderGeometry = () => {
-    const size = 0.6 + Math.random() * 0.4;
+  const { geometry, wireframe } = useMemo(() => {
+    const size = 0.6 + (position[0] + position[1] + position[2]) * 0.1; // Deterministic size based on position
+    const isWireframe = (position[0] + position[1]) % 2 > 0.6; // Deterministic wireframe
+    
     switch (geometryType) {
       case 'cube':
-        return <boxGeometry args={[size, size, size]} />;
+        return { 
+          geometry: <boxGeometry args={[size, size, size]} />,
+          wireframe: isWireframe
+        };
       case 'pyramid':
-        return <coneGeometry args={[size, size * 1.5, 4]} />;
+        return { 
+          geometry: <coneGeometry args={[size, size * 1.5, 4]} />,
+          wireframe: isWireframe
+        };
       case 'octahedron':
-        return <octahedronGeometry args={[size, 0]} />;
+        return { 
+          geometry: <octahedronGeometry args={[size, 0]} />,
+          wireframe: isWireframe
+        };
       case 'icosahedron':
-        return <icosahedronGeometry args={[size, 0]} />;
+        return { 
+          geometry: <icosahedronGeometry args={[size, 0]} />,
+          wireframe: isWireframe
+        };
       case 'dodecahedron':
       default:
-        return <dodecahedronGeometry args={[size, 0]} />;
+        return { 
+          geometry: <dodecahedronGeometry args={[size, 0]} />,
+          wireframe: isWireframe
+        };
     }
-  };
+  }, [geometryType, position]);
 
   return (
     <mesh ref={meshRef} position={position}>
-      {renderGeometry()}
+      {geometry}
       <meshStandardMaterial 
         color={color} 
-        wireframe={Math.random() > 0.6}
+        wireframe={wireframe}
         transparent
         opacity={0.7}
         emissive={color}
@@ -64,19 +81,28 @@ const Scene = () => {
     }
   });
 
-  const geometryTypes = ['cube', 'pyramid', 'octahedron', 'icosahedron', 'dodecahedron'];
-  const colors = ['#8b5cf6', '#06b6d4', '#10b981', '#f59e0b', '#ef4444', '#ec4899', '#3b82f6', '#f97316'];
-
-  const geometries = Array.from({ length: 15 }, (_, i) => ({
-    position: [
-      (Math.random() - 0.5) * 18,
-      (Math.random() - 0.5) * 18,
-      (Math.random() - 0.5) * 18
-    ] as [number, number, number],
-    color: colors[Math.floor(Math.random() * colors.length)],
-    speed: 0.008 + Math.random() * 0.015,
-    geometryType: geometryTypes[Math.floor(Math.random() * geometryTypes.length)]
-  }));
+  const geometries = useMemo(() => {
+    const geometryTypes = ['cube', 'pyramid', 'octahedron', 'icosahedron', 'dodecahedron'];
+    const colors = ['#8b5cf6', '#06b6d4', '#10b981', '#f59e0b', '#ef4444', '#ec4899', '#3b82f6', '#f97316'];
+    
+    return Array.from({ length: 15 }, (_, i) => {
+      // Use index-based deterministic "randomness" for consistent results
+      const seedX = Math.sin(i * 12.9898) * 43758.5453;
+      const seedY = Math.sin(i * 78.233) * 43758.5453;
+      const seedZ = Math.sin(i * 39.346) * 43758.5453;
+      
+      return {
+        position: [
+          (seedX - Math.floor(seedX) - 0.5) * 18,
+          (seedY - Math.floor(seedY) - 0.5) * 18,
+          (seedZ - Math.floor(seedZ) - 0.5) * 18
+        ] as [number, number, number],
+        color: colors[i % colors.length],
+        speed: 0.008 + ((i % 10) / 10) * 0.015,
+        geometryType: geometryTypes[i % geometryTypes.length]
+      };
+    });
+  }, []);
 
   return (
     <group ref={groupRef}>
@@ -111,8 +137,20 @@ const ThreeBackground = () => {
         dpr={[1, 2]}
         performance={{ min: 0.5 }}
         style={{ background: 'linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #2d1b69 100%)' }}
+        gl={{ 
+          antialias: true,
+          alpha: false,
+          powerPreference: "high-performance"
+        }}
+        onCreated={({ gl }) => {
+          gl.setClearColor('#0f0f23');
+        }}
       >
-        <Suspense fallback={null}>
+        <Suspense fallback={
+          <div className="flex items-center justify-center h-full">
+            <div className="w-8 h-8 border-2 border-purple-500 border-t-transparent rounded-full animate-spin" />
+          </div>
+        }>
           <Scene />
           <OrbitControls 
             enableZoom={false} 
