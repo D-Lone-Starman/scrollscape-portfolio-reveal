@@ -4,6 +4,7 @@ import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import { useEffect, useRef } from 'react';
 import modelViewerImage from '../assets/3d-model-viewer.png';
 import bookverseImage from '../assets/bookverse-ecommerce.png';
+import loja3dImage from '../assets/loja-3d-ecommerce.png';
 
 const ProjectsSection = () => {
   const { isVisible, setElement } = useScrollAnimation();
@@ -17,10 +18,11 @@ const ProjectsSection = () => {
 
   const projects = [
     {
-      title: "Interactive Dashboard",
-      description: "A modern dashboard with real-time data visualization using React and Chart.js",
-      technologies: ["React", "TypeScript", "Tailwind CSS", "Chart.js"],
-      gradient: "from-purple-500 to-pink-500"
+      title: "3D E-commerce Model",
+      description: "Interactive 3D e-commerce platform for 3D objects with cart functionality and Brazilian real pricing",
+      technologies: ["React", "Three.js", "WebGL", "TypeScript"],
+      gradient: "from-purple-500 to-pink-500",
+      image: loja3dImage
     },
     {
       title: "BookVerse E-commerce",
