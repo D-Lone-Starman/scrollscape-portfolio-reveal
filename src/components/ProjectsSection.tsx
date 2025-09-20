@@ -2,6 +2,7 @@
 import { ExternalLink, Github } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import { useEffect, useRef } from 'react';
+import modelViewerImage from '../assets/3d-model-viewer.png';
 
 const ProjectsSection = () => {
   const { isVisible, setElement } = useScrollAnimation();
@@ -27,10 +28,11 @@ const ProjectsSection = () => {
       gradient: "from-cyan-500 to-blue-500"
     },
     {
-      title: "3D Portfolio Site",
-      description: "Interactive portfolio website with Three.js 3D elements and scroll animations",
-      technologies: ["React", "Three.js", "Tailwind CSS", "Framer Motion"],
-      gradient: "from-green-500 to-teal-500"
+      title: "3D Model Viewer",
+      description: "Interactive 3D model viewer with geometric shapes and grid visualization",
+      technologies: ["React", "Three.js", "WebGL", "TypeScript"],
+      gradient: "from-green-500 to-teal-500",
+      image: modelViewerImage
     }
   ];
 
@@ -58,13 +60,23 @@ const ProjectsSection = () => {
                 style={{ transitionDelay: `${index * 200}ms` }}
               >
                 <div className="group bg-white/5 backdrop-blur-lg rounded-xl overflow-hidden border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
-                  <div className={`h-48 bg-gradient-to-br ${project.gradient} relative overflow-hidden`}>
-                    <div className="absolute inset-0 bg-black/20"></div>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-24 h-24 border-2 border-white/30 rounded-lg flex items-center justify-center">
-                        <div className="w-12 h-12 bg-white/20 rounded backdrop-blur-sm"></div>
-                      </div>
-                    </div>
+                  <div className={`h-48 ${project.image ? 'bg-black/40' : `bg-gradient-to-br ${project.gradient}`} relative overflow-hidden`}>
+                    {project.image ? (
+                      <img 
+                        src={project.image} 
+                        alt={project.title}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <>
+                        <div className="absolute inset-0 bg-black/20"></div>
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="w-24 h-24 border-2 border-white/30 rounded-lg flex items-center justify-center">
+                            <div className="w-12 h-12 bg-white/20 rounded backdrop-blur-sm"></div>
+                          </div>
+                        </div>
+                      </>
+                    )}
                   </div>
                   
                   <div className="p-6">
