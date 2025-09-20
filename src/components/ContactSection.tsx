@@ -1,5 +1,5 @@
 
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Github } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import { useEffect, useRef, useState } from 'react';
 
@@ -71,6 +71,23 @@ const ContactSection = () => {
                   <div>
                     <p className="text-white font-medium">Phone</p>
                     <p className="text-gray-300">21 988726892</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-center space-x-4">
+                  <div className="bg-gray-500/20 p-3 rounded-lg">
+                    <Github className="text-gray-400" size={20} />
+                  </div>
+                  <div>
+                    <p className="text-white font-medium">GitHub</p>
+                    <a 
+                      href="https://github.com/D-Lone-Starman" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-gray-300 hover:text-white transition-colors"
+                    >
+                      D-Lone-Starman
+                    </a>
                   </div>
                 </div>
                 

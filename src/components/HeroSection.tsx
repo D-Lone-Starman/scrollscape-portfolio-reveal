@@ -43,19 +43,23 @@ const HeroSection = () => {
         
         <div className="flex justify-center space-x-6 mb-12">
           <a 
-            href="#" 
+            href="https://github.com/D-Lone-Starman" 
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-gray-300 hover:text-white transition-colors duration-200 transform hover:scale-110"
           >
             <Github size={32} />
           </a>
           <a 
-            href="#" 
+            href="https://www.linkedin.com/in/jo%C3%A3o-pedro-estrella-cordeiro/" 
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-gray-300 hover:text-white transition-colors duration-200 transform hover:scale-110"
           >
             <Linkedin size={32} />
           </a>
           <a 
-            href="#" 
+            href="mailto:jp.estrellacord@yahoo.com" 
             className="text-gray-300 hover:text-white transition-colors duration-200 transform hover:scale-110"
           >
             <Mail size={32} />
