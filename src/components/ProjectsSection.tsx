@@ -3,6 +3,7 @@ import { ExternalLink, Github } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import { useEffect, useRef } from 'react';
 import modelViewerImage from '../assets/3d-model-viewer.png';
+import bookverseImage from '../assets/bookverse-ecommerce.png';
 
 const ProjectsSection = () => {
   const { isVisible, setElement } = useScrollAnimation();
@@ -22,10 +23,12 @@ const ProjectsSection = () => {
       gradient: "from-purple-500 to-pink-500"
     },
     {
-      title: "E-commerce Landing",
-      description: "Responsive e-commerce landing page with smooth animations and modern design",
-      technologies: ["HTML5", "CSS3", "JavaScript", "GSAP"],
-      gradient: "from-cyan-500 to-blue-500"
+      title: "BookVerse E-commerce",
+      description: "Modern book e-commerce platform with search functionality and responsive design",
+      technologies: ["React", "Firebase", "CSS3", "JavaScript"],
+      gradient: "from-cyan-500 to-blue-500",
+      image: bookverseImage,
+      liveUrl: "https://projeto-final-c21d3.web.app/"
     },
     {
       title: "3D Model Viewer",
@@ -99,10 +102,22 @@ const ProjectsSection = () => {
                         <Github size={16} />
                         <span className="text-sm">Code</span>
                       </button>
-                      <button className="flex items-center space-x-2 text-cyan-400 hover:text-cyan-300 transition-colors">
-                        <ExternalLink size={16} />
-                        <span className="text-sm">Live Demo</span>
-                      </button>
+                      {project.liveUrl ? (
+                        <a 
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center space-x-2 text-cyan-400 hover:text-cyan-300 transition-colors"
+                        >
+                          <ExternalLink size={16} />
+                          <span className="text-sm">Live Demo</span>
+                        </a>
+                      ) : (
+                        <button className="flex items-center space-x-2 text-cyan-400 hover:text-cyan-300 transition-colors">
+                          <ExternalLink size={16} />
+                          <span className="text-sm">Live Demo</span>
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>
