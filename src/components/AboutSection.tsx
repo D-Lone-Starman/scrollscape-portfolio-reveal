@@ -1,9 +1,11 @@
 
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import { useLanguage } from '../contexts/LanguageContext';
 import { useEffect, useRef } from 'react';
 
 const AboutSection = () => {
   const { isVisible, setElement } = useScrollAnimation();
+  const { t } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -20,7 +22,7 @@ const AboutSection = () => {
         }`}>
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
             <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-              About Me
+              {t('about.title')}
             </span>
           </h2>
           
@@ -44,18 +46,15 @@ const AboutSection = () => {
               isVisible ? 'animate-fade-in-right' : 'opacity-0 translate-x-10'
             }`}>
               <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10">
-                <h3 className="text-2xl font-semibold text-white mb-6">Hello, I'm João Estrella</h3>
+                <h3 className="text-2xl font-semibold text-white mb-6">{t('about.greeting')}</h3>
                 <p className="text-gray-300 leading-relaxed mb-6">
-                  I'm passionate about creating beautiful, user-friendly interfaces that provide exceptional 
-                  user experiences. With a focus on modern web technologies like React, Tailwind CSS, and 
-                  Three.js, I bring ideas to life through code.
+                  {t('about.description1')}
                 </p>
                 <p className="text-gray-300 leading-relaxed mb-6">
-                  My journey in frontend development started with curiosity about how beautiful websites 
-                  are made, and has evolved into a passion for creating immersive digital experiences.
+                  {t('about.description2')}
                 </p>
                 <div className="flex flex-wrap gap-3">
-                  {['Creative', 'Detail-oriented', 'Problem solver', 'Team player'].map((trait, index) => (
+                  {[t('about.trait1'), t('about.trait2'), t('about.trait3'), t('about.trait4')].map((trait, index) => (
                     <span 
                       key={trait}
                       className="px-3 py-1 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full text-sm text-purple-300 border border-purple-500/30"

@@ -1,10 +1,13 @@
 
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { Switch } from '@/components/ui/switch';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { language, setLanguage, t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,11 +19,11 @@ const Navigation = () => {
   }, []);
 
   const navItems = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Contact', href: '#contact' }
+    { name: t('nav.home'), href: '#home' },
+    { name: t('nav.about'), href: '#about' },
+    { name: t('nav.skills'), href: '#skills' },
+    { name: t('nav.projects'), href: '#projects' },
+    { name: t('nav.contact'), href: '#contact' }
   ];
 
   const scrollToSection = (href: string) => {
@@ -35,8 +38,17 @@ const Navigation = () => {
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <div className="flex-shrink-0">
-            <h1 className="text-xl font-bold text-white">Portfolio</h1>
+          <div className="flex-shrink-0 flex items-center space-x-4">
+            <h1 className="text-xl font-bold text-white">{t('nav.portfolio')}</h1>
+            <div className="flex items-center space-x-2">
+              <span className="text-sm text-gray-300">EN</span>
+              <Switch
+                checked={language === 'pt'}
+                onCheckedChange={(checked) => setLanguage(checked ? 'pt' : 'en')}
+                className="data-[state=checked]:bg-primary"
+              />
+              <span className="text-sm text-gray-300">PT</span>
+            </div>
           </div>
           
           <div className="hidden md:block">

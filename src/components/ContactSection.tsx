@@ -1,10 +1,12 @@
 
 import { Mail, Phone, MapPin, Send, Github } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import { useLanguage } from '../contexts/LanguageContext';
 import { useEffect, useRef, useState } from 'react';
 
 const ContactSection = () => {
   const { isVisible, setElement } = useScrollAnimation();
+  const { t } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
   const [formData, setFormData] = useState({
     name: '',
@@ -39,7 +41,7 @@ const ContactSection = () => {
         }`}>
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
             <span className="bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
-              Let's Connect
+              {t('contact.title')}
             </span>
           </h2>
           
@@ -47,10 +49,9 @@ const ContactSection = () => {
             <div className={`transition-all duration-1000 delay-200 ${
               isVisible ? 'animate-fade-in-left' : 'opacity-0 -translate-x-10'
             }`}>
-              <h3 className="text-2xl font-semibold text-white mb-6">Get in Touch</h3>
+              <h3 className="text-2xl font-semibold text-white mb-6">{t('contact.subtitle')}</h3>
               <p className="text-gray-300 mb-8 leading-relaxed">
-                I'm always excited to work on new projects and collaborate with amazing people. 
-                Let's discuss how we can bring your ideas to life!
+                {t('contact.description')}
               </p>
               
               <div className="space-y-4">
@@ -59,7 +60,7 @@ const ContactSection = () => {
                     <Mail className="text-purple-400" size={20} />
                   </div>
                   <div>
-                    <p className="text-white font-medium">Email</p>
+                    <p className="text-white font-medium">{t('contact.email')}</p>
                     <p className="text-gray-300">jp.estrellacord@yahoo.com</p>
                   </div>
                 </div>
@@ -69,7 +70,7 @@ const ContactSection = () => {
                     <Phone className="text-cyan-400" size={20} />
                   </div>
                   <div>
-                    <p className="text-white font-medium">Phone</p>
+                    <p className="text-white font-medium">{t('contact.phone')}</p>
                     <p className="text-gray-300">21 988726892</p>
                   </div>
                 </div>
@@ -79,7 +80,7 @@ const ContactSection = () => {
                     <Github className="text-gray-400" size={20} />
                   </div>
                   <div>
-                    <p className="text-white font-medium">GitHub</p>
+                    <p className="text-white font-medium">{t('contact.github')}</p>
                     <a 
                       href="https://github.com/D-Lone-Starman" 
                       target="_blank" 
@@ -96,7 +97,7 @@ const ContactSection = () => {
                     <MapPin className="text-green-400" size={20} />
                   </div>
                   <div>
-                    <p className="text-white font-medium">Location</p>
+                    <p className="text-white font-medium">{t('contact.location')}</p>
                     <p className="text-gray-300">Rio de Janeiro, Brasil</p>
                   </div>
                 </div>
@@ -108,7 +109,7 @@ const ContactSection = () => {
             }`}>
               <form onSubmit={handleSubmit} className="bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10">
                 <div className="mb-6">
-                  <label htmlFor="name" className="block text-white font-medium mb-2">Name</label>
+                  <label htmlFor="name" className="block text-white font-medium mb-2">{t('contact.form.name')}</label>
                   <input
                     type="text"
                     id="name"
@@ -116,13 +117,13 @@ const ContactSection = () => {
                     value={formData.name}
                     onChange={handleChange}
                     className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-500 transition-colors"
-                    placeholder="Your name"
+                    placeholder={t('contact.form.namePlaceholder')}
                     required
                   />
                 </div>
                 
                 <div className="mb-6">
-                  <label htmlFor="email" className="block text-white font-medium mb-2">Email</label>
+                  <label htmlFor="email" className="block text-white font-medium mb-2">{t('contact.form.email')}</label>
                   <input
                     type="email"
                     id="email"
@@ -130,13 +131,13 @@ const ContactSection = () => {
                     value={formData.email}
                     onChange={handleChange}
                     className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-500 transition-colors"
-                    placeholder="your@email.com"
+                    placeholder={t('contact.form.emailPlaceholder')}
                     required
                   />
                 </div>
                 
                 <div className="mb-6">
-                  <label htmlFor="message" className="block text-white font-medium mb-2">Message</label>
+                  <label htmlFor="message" className="block text-white font-medium mb-2">{t('contact.form.message')}</label>
                   <textarea
                     id="message"
                     name="message"
@@ -144,7 +145,7 @@ const ContactSection = () => {
                     onChange={handleChange}
                     rows={4}
                     className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-500 transition-colors resize-none"
-                    placeholder="Tell me about your project..."
+                    placeholder={t('contact.form.messagePlaceholder')}
                     required
                   ></textarea>
                 </div>
@@ -154,7 +155,7 @@ const ContactSection = () => {
                   className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 rounded-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2"
                 >
                   <Send size={18} />
-                  <span>Send Message</span>
+                  <span>{t('contact.form.send')}</span>
                 </button>
               </form>
             </div>

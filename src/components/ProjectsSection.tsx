@@ -1,6 +1,7 @@
 
 import { ExternalLink, Github } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import { useLanguage } from '../contexts/LanguageContext';
 import { useEffect, useRef } from 'react';
 import modelViewerImage from '../assets/3d-model-viewer.png';
 import bookverseImage from '../assets/bookverse-ecommerce.png';
@@ -8,6 +9,7 @@ import loja3dImage from '../assets/loja-3d-ecommerce.png';
 
 const ProjectsSection = () => {
   const { isVisible, setElement } = useScrollAnimation();
+  const { t } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -18,23 +20,23 @@ const ProjectsSection = () => {
 
   const projects = [
     {
-      title: "3D E-commerce Model",
-      description: "Interactive 3D e-commerce platform for 3D objects with cart functionality and Brazilian real pricing",
+      title: t('projects.dashboard.title'),
+      description: t('projects.dashboard.description'),
       technologies: ["React", "Three.js", "WebGL", "TypeScript"],
       gradient: "from-purple-500 to-pink-500",
       image: loja3dImage
     },
     {
-      title: "BookVerse E-commerce",
-      description: "Modern book e-commerce platform with search functionality and responsive design",
+      title: t('projects.bookverse.title'),
+      description: t('projects.bookverse.description'),
       technologies: ["React", "Firebase", "CSS3", "JavaScript"],
       gradient: "from-cyan-500 to-blue-500",
       image: bookverseImage,
       liveUrl: "https://projeto-final-c21d3.web.app/"
     },
     {
-      title: "3D Model Viewer",
-      description: "Interactive 3D model viewer with geometric shapes and grid visualization",
+      title: t('projects.viewer.title'),
+      description: t('projects.viewer.description'),
       technologies: ["React", "Three.js", "WebGL", "TypeScript"],
       gradient: "from-green-500 to-teal-500",
       image: modelViewerImage
@@ -49,7 +51,7 @@ const ProjectsSection = () => {
         }`}>
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
             <span className="bg-gradient-to-r from-pink-400 to-red-500 bg-clip-text text-transparent">
-              Featured Projects
+              {t('projects.title')}
             </span>
           </h2>
           
@@ -102,7 +104,7 @@ const ProjectsSection = () => {
                     <div className="flex space-x-4">
                       <button className="flex items-center space-x-2 text-purple-400 hover:text-purple-300 transition-colors">
                         <Github size={16} />
-                        <span className="text-sm">Code</span>
+                        <span className="text-sm">{t('projects.viewCode')}</span>
                       </button>
                       {project.liveUrl ? (
                         <a 
@@ -112,12 +114,12 @@ const ProjectsSection = () => {
                           className="flex items-center space-x-2 text-cyan-400 hover:text-cyan-300 transition-colors"
                         >
                           <ExternalLink size={16} />
-                          <span className="text-sm">Live Demo</span>
+                          <span className="text-sm">{t('projects.viewProject')}</span>
                         </a>
                       ) : (
                         <button className="flex items-center space-x-2 text-cyan-400 hover:text-cyan-300 transition-colors">
                           <ExternalLink size={16} />
-                          <span className="text-sm">Live Demo</span>
+                          <span className="text-sm">{t('projects.viewProject')}</span>
                         </button>
                       )}
                     </div>

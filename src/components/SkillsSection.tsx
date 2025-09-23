@@ -1,9 +1,11 @@
 
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import { useLanguage } from '../contexts/LanguageContext';
 import { useEffect, useRef } from 'react';
 
 const SkillsSection = () => {
   const { isVisible, setElement } = useScrollAnimation();
+  const { t } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -29,7 +31,7 @@ const SkillsSection = () => {
         }`}>
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
             <span className="bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
-              Skills & Technologies
+              {t('skills.title')}
             </span>
           </h2>
           
