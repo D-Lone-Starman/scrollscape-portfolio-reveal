@@ -121,7 +121,14 @@ const translations = {
   }
 };
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+// Create context with default value to prevent undefined context
+const defaultContextValue: LanguageContextType = {
+  language: 'en',
+  setLanguage: () => {},
+  t: (key: string) => key
+};
+
+const LanguageContext = createContext<LanguageContextType>(defaultContextValue);
 
 interface LanguageProviderProps {
   children: ReactNode;
@@ -134,8 +141,14 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
     return translations[language][key as keyof typeof translations['en']] || key;
   };
 
+  const value = {
+    language,
+    setLanguage,
+    t
+  };
+
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={value}>
       {children}
     </LanguageContext.Provider>
   );
@@ -143,8 +156,9 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
 
 export const useLanguage = () => {
   const context = useContext(LanguageContext);
-  if (context === undefined) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
+  if (!context) {
+    console.error('useLanguage must be used within a LanguageProvider');
+    return defaultContextValue;
   }
   return context;
 };
