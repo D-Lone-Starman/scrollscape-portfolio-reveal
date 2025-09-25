@@ -1,46 +1,54 @@
-# Welcome to your Lovable project
+# Portfolio Reveal
 
+[🖥 Ver demo online](https://scrollscape-portfolio-reveal.vercel.app)  
 
+Portfólio em formato de site revelado, com foco em visual moderno, interações fluídas e design responsivo.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+---
 
-Follow these steps:
+## ✨ Tecnologias usadas
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- Vite  
+- TypeScript  
+- React  
+- shadcn-ui  
+- Tailwind CSS  
+- (outras dependências conforme `package.json`)  
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+---
 
-# Step 3: Install the necessary dependencies.
-npm i
+## 🚀 Como rodar localmente
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+1. Clone o repositório  
+   ```bash
+   git clone https://github.com/D-Lone-Starman/scrollscape-portfolio-reveal.git
+Acesse o diretório
+
+bash
+Copy code
+cd scrollscape-portfolio-reveal
+Instale as dependências
+
+bash
+Copy code
+npm install
+Inicie o servidor de desenvolvimento
+
+bash
+Copy code
 npm run dev
-```
+Abra no navegador
+Vá para http://localhost:5173 (ou porta informada no terminal)
 
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
+📦 Estrutura do projeto
+csharp
+Copy code
+/
+├── public/                # Assets públicos (imagens, ícones, etc.)
+├── src/                   # Código-fonte
+│   ├── components/        # Componentes reutilizáveis
+│   ├── pages/             # Páginas e rotas
+│   └── styles/            # Estilos adicionais (se houver)
+├── .gitignore
+├── package.json
+├─
