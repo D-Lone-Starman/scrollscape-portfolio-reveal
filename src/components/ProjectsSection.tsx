@@ -25,6 +25,7 @@ const ProjectsSection = () => {
       technologies: ["React", "Three.js", "WebGL", "TypeScript"],
       gradient: "from-purple-500 to-pink-500",
       image: loja3dImage
+      liveUrl: "https://github.com/D-Lone-Starman/rep-aula-JS"
     },
     {
       title: t('projects.bookverse.title'),
